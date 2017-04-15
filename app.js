@@ -346,7 +346,7 @@ function PredictImage(req,res,intent) {
 	              
 	              speech += 'Percent ';
 	           
-                 send_alexa_response(res, speech, 'Salesforce', 'Get Current Case', 'Success', false);
+                 send_alexa_response(res, speech, 'Salesforce', 'Predict Last Uploaded Image Type', 'Success', false);
             }
 
 		});
