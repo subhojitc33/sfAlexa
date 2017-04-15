@@ -1,11 +1,13 @@
 /* GLOBAL / PROCESS VARIABLES */
 var port = process.env.PORT || 8080;
-var clientId = '3MVG9ZL0ppGP5UrAjkXOacFI9lqNFAA3UZbWkFy3RyiCKzE7PfmhttvbQo3MnEW.V2ccoEBQnktQuaI92PHcm';
-var clientSecret = '4700911389884901991';
-var redirectURI = 'https://layla.amazon.com/api/skill/link/M2ZXTLNFRIDBRA';
+var clientId = process.env.SF_CLIENT_ID;
+var clientSecret = process.env.SF_CLIENT_SECRET;
+var redirectURI = process.env.SF_REDIRECT_URI;
 var API = process.env.API || 'v32.0';
 var oauth_timeout = process.env.oauth_timeout || 5400;
 var DEBUG_ON = process.env.DEBUG_ON || true;
+var username=process.env.SF_USER_NAME;
+var password=process.env.SF_PASSWORD;
 
 /* REQUIRED PACKAGES */
 
@@ -69,7 +71,7 @@ function PleaseWait(req,res,intent) {
 }
 
 function GetCurrentCase(req,res,intent) {
-	org.authenticate({ username: 'subhojit_dev3@gmail.com', password: 'November@2013XD1K3tYl2sQ318v5FhDu6huso'}, function(err2, resp){
+	org.authenticate({ username: username, password: password}, function(err2, resp){
 	console.log(org.oauth.instance_url+'####'+org.oauth);
 		var oauth=resp;
 		org.oauth=resp;
@@ -102,7 +104,7 @@ function GetCurrentCase(req,res,intent) {
 
 
 function GetLatestCases(req,res,intent) {
-	org.authenticate({ username: 'subhojit_dev3@gmail.com', password: 'November@2013XD1K3tYl2sQ318v5FhDu6huso'}, function(err2, resp){
+	org.authenticate({ username: username, password: password}, function(err2, resp){
 	console.log(org.oauth.instance_url+'####'+org.oauth);
 		var oauth=resp;
 		org.oauth=resp;
@@ -130,7 +132,7 @@ function GetLatestCases(req,res,intent) {
 }
 
 function UpdateCase(req,res,intent) {
-	org.authenticate({ username: 'subhojit_dev3@gmail.com', password: 'November@2013XD1K3tYl2sQ318v5FhDu6huso'}, function(err2, resp){
+	org.authenticate({ username: username, password: password}, function(err2, resp){
 	console.log(org.oauth.instance_url+'####'+org.oauth);
 		var oauth=resp;
 		org.oauth=resp;
@@ -181,7 +183,7 @@ function UpdateCase(req,res,intent) {
 }
 
 function OpenCase(req,res,intent) {
-	org.authenticate({ username: 'subhojit_dev3@gmail.com', password: 'November@2013XD1K3tYl2sQ318v5FhDu6huso'}, function(err2, resp){
+	org.authenticate({ username: username, password: password}, function(err2, resp){
 	console.log(org.oauth.instance_url+'####'+org.oauth);
 		var oauth=resp;
 		org.oauth=resp;
@@ -207,13 +209,13 @@ function OpenCase(req,res,intent) {
 
 
 function AddPost(req,res,intent) {
-	org.authenticate({ username: 'subhojit_dev3@gmail.com', password: 'November@2013XD1K3tYl2sQ318v5FhDu6huso'}, function(err2, resp){
+	org.authenticate({ username: username, password: password}, function(err2, resp){
 	console.log(org.oauth.instance_url+'####'+org.oauth);
 		var oauth=resp;
 		org.oauth=resp;
 		var post = intent.slots.post.value;
     	console.log("CHATTER POST>>>>"+post);
-    	org.apexRest({oauth:intent.oauth, uri:'EchoCaseSearch',method:'POST',body:'{"CaseIdentifier":null}'},
+    	org.apexRest({oauth:oauth, uri:'EchoCaseSearch',method:'POST',body:'{"CaseIdentifier":null}'},
 		function(err,result) {
 			if(err) {
               console.log(err);
