@@ -343,7 +343,7 @@ function PredictImage(req,res,intent) {
 	              speech += '. .';
 	              speech += 'With Probability ';
 	              speech += '. .';
-	              speech += result.ImageType*100;
+	              speech += (result.prob*100);
 	              
 	              speech += 'Percent ';
 	           
