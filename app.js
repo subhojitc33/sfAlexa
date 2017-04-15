@@ -69,6 +69,7 @@ function PleaseWait(req,res,intent) {
 }
 
 function GetCurrentCase(req,res,intent) {
+	org.authenticate({ username: 'subhojit_dev3@gmail.com', password: 'November@2013XD1K3tYl2sQ318v5FhDu6huso'}, function(err, resp){
 	org.apexRest({oauth:intent.oauth, uri:'EchoCaseControl'},
 		function(err,result) {
 			if(err) {
@@ -93,6 +94,7 @@ function GetCurrentCase(req,res,intent) {
             }
 
 		});
+	});	
 }
 
 
