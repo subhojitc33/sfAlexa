@@ -72,7 +72,7 @@ function GetCurrentCase(req,res,intent) {
 	org.authenticate({ username: 'subhojit_dev3@gmail.com', password: 'November@2013XD1K3tYl2sQ318v5FhDu6huso'}, function(err2, resp){
 	console.log(org.oauth.instance_url+'####'+org.oauth);
 		
-	org.apexRest({oauth:intent.oauth, uri:'EchoCaseControl'},
+	org.apexRest({oauth:org.oauth, uri:'EchoCaseControl'},
 		function(err,result) {
 			if(err) {
               console.log(err);
