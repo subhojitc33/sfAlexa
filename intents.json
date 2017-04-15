@@ -1,31 +1,43 @@
 {
   "intents": [
     {
-      "intent": "GetCurrentCase",
-      "slots": []
+      "intent": "GetCurrentCase"
     },
     {
-     "intent": "UpdateCase",
-      "slots": [{
+      "slots": [
+        {
           "name": "update",
           "type": "LITERAL"
-        }]
-    },{
-      "intent": "AddPost",
-      "slots": [{
+        }
+      ],
+      "intent": "UpdateCase"
+    },
+    {
+      "slots": [
+        {
           "name": "post",
           "type": "LITERAL"
-        }]
-    },{
-      "intent": "OpenCase",
-      "slots": [{
+        }
+      ],
+      "intent": "AddPost"
+    },
+    {
+      "slots": [
+        {
           "name": "number",
           "type": "NUMBER"
-        }]
-    },{
-      "intent": "GetLatestCases",
-      "slots": []
-    },{
-     "intent": "PleaseWait",
-      "slots": []
+        }
+      ],
+      "intent": "OpenCase"
+    },
+    {
+      "intent": "GetLatestCases"
+    },
+    {
+      "intent": "PleaseWait"
+    },
+    {
+      "intent": "PredictImage"
     }
+  ]
+}
