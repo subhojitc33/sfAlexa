@@ -1,8 +1,8 @@
 /* GLOBAL / PROCESS VARIABLES */
 var port = process.env.PORT || 8080;
-var clientId = '';
-var clientSecret = '';
-var redirectURI = '';
+var clientId = '3MVG9ZL0ppGP5UrAjkXOacFI9lqNFAA3UZbWkFy3RyiCKzE7PfmhttvbQo3MnEW.V2ccoEBQnktQuaI92PHcm';
+var clientSecret = '4700911389884901991';
+var redirectURI = 'https://layla.amazon.com/api/skill/link/M2ZXTLNFRIDBRA';
 var API = process.env.API || 'v32.0';
 var oauth_timeout = process.env.oauth_timeout || 5400;
 var DEBUG_ON = process.env.DEBUG_ON || true;
