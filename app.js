@@ -59,7 +59,7 @@ sfdc_amazon.addRoutes(app,oauth_timeout,true);
 var intent_functions = new Array();
 intent_functions['PleaseWait'] = PleaseWait;
 intent_functions['GetCurrentCase'] = GetCurrentCase;
-intent_functions['GetLatestCases'] = GetCurrentCase;
+intent_functions['GetLatestCases'] = GetLatestCases;
 intent_functions['OpenCase'] = OpenCase;
 intent_functions['UpdateCase'] = UpdateCase;
 intent_functions['AddPost'] = AddPost;
