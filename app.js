@@ -104,7 +104,9 @@ function GetCurrentCase(req,res,intent) {
 function GetLatestCases(req,res,intent) {
 	org.authenticate({ username: 'subhojit_dev3@gmail.com', password: 'November@2013XD1K3tYl2sQ318v5FhDu6huso'}, function(err2, resp){
 	console.log(org.oauth.instance_url+'####'+org.oauth);
-	org.apexRest({oauth:intent.oauth, uri:'EchoCaseSearch'},
+		var oauth=resp;
+		org.oauth=resp;
+	org.apexRest({oauth:oauth, uri:'EchoCaseSearch'},
 		function(err,result) {
 			if(err) {
               console.log(err);
@@ -128,6 +130,10 @@ function GetLatestCases(req,res,intent) {
 }
 
 function UpdateCase(req,res,intent) {
+	org.authenticate({ username: 'subhojit_dev3@gmail.com', password: 'November@2013XD1K3tYl2sQ318v5FhDu6huso'}, function(err2, resp){
+	console.log(org.oauth.instance_url+'####'+org.oauth);
+		var oauth=resp;
+		org.oauth=resp;
 	var update = intent.slots.update.value;
     update = update.charAt(0).toUpperCase() + update.slice(1);
     console.log("UPDATE REQUEST>>>>> "+update);
@@ -136,7 +142,7 @@ function UpdateCase(req,res,intent) {
     if(update == 'Close') { update = 'Closed'; } //really, Alexa?
 
     if(update == 'Low' || update == 'Medium' || update == 'High') {
-            org.apexRest({oauth:intent.oauth, uri:'EchoCaseControl',method:'POST',body:'{"priority":"'+update+'"}'},
+            org.apexRest({oauth:oauth, uri:'EchoCaseControl',method:'POST',body:'{"priority":"'+update+'"}'},
             	function(err,result) {
 					if(err) {
 		              console.log(err);
@@ -152,7 +158,7 @@ function UpdateCase(req,res,intent) {
      }  
 
     else if(update == 'Closed' || update == 'New' || update == 'Working' || update == 'Escalated') {
-              org.apexRest({oauth:intent.oauth, uri:'EchoCaseControl',method:'POST',body:'{"status":"'+update+'"}'},
+              org.apexRest({oauth:oauth, uri:'EchoCaseControl',method:'POST',body:'{"status":"'+update+'"}'},
             	function(err,result) {
 					if(err) {
 		              console.log(err);
@@ -171,13 +177,18 @@ function UpdateCase(req,res,intent) {
      	send_alexa_response(res, 'The update request did not hold a valid priority or update', 'Salesforce', 'Updated Case', 'Failed', false);
 
      }
+		});
 }
 
 function OpenCase(req,res,intent) {
+	org.authenticate({ username: 'subhojit_dev3@gmail.com', password: 'November@2013XD1K3tYl2sQ318v5FhDu6huso'}, function(err2, resp){
+	console.log(org.oauth.instance_url+'####'+org.oauth);
+		var oauth=resp;
+		org.oauth=resp;
 	var number = intent.slots.number.value;
 	number = number.toString();
 	console.log("CASE IDENTIFIER>>>>>"+number);
-    org.apexRest({oauth:intent.oauth, uri:'EchoCaseSearch',method:'POST',body:'{"CaseIdentifier":"'+number+'"}'},
+    org.apexRest({oauth:oauth, uri:'EchoCaseSearch',method:'POST',body:'{"CaseIdentifier":"'+number+'"}'},
 		function(err,result) {
 			if(err) {
               console.log(err);
@@ -189,12 +200,17 @@ function OpenCase(req,res,intent) {
             }
 
 		});
+		});
 }
 
 
 
 
 function AddPost(req,res,intent) {
+	org.authenticate({ username: 'subhojit_dev3@gmail.com', password: 'November@2013XD1K3tYl2sQ318v5FhDu6huso'}, function(err2, resp){
+	console.log(org.oauth.instance_url+'####'+org.oauth);
+		var oauth=resp;
+		org.oauth=resp;
 		var post = intent.slots.post.value;
     	console.log("CHATTER POST>>>>"+post);
     	org.apexRest({oauth:intent.oauth, uri:'EchoCaseSearch',method:'POST',body:'{"CaseIdentifier":null}'},
@@ -235,6 +251,7 @@ function AddPost(req,res,intent) {
             }
 
 		});  
+	});
 }
 
 
