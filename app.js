@@ -65,6 +65,7 @@ intent_functions['GetLatestCases'] = GetLatestCases;
 intent_functions['OpenCase'] = OpenCase;
 intent_functions['UpdateCase'] = UpdateCase;
 intent_functions['AddPost'] = AddPost;
+intent_functions['PredictImage'] = PredictImage;
 
 function PleaseWait(req,res,intent) {
   send_alexa_response(res, 'Waiting', 'Salesforce', '...', 'Waiting', false);
@@ -322,5 +323,34 @@ function route_alexa_intent(req, res) {
 	   intent_function = intent_functions[intent.intentName];
 	   intent_function(req,res,intent);
    }
+function PredictImage(req,res,intent) {
+	org.authenticate({ username: username, password: password}, function(err2, resp){
+	console.log(org.oauth.instance_url+'####'+org.oauth);
+		var oauth=resp;
+		org.oauth=resp;
+	org.apexRest({oauth:oauth, uri:'PredictImageType'},
+		function(err,result) {
+			if(err) {
+              console.log(err);
+              send_alexa_error(res,'An error occured during Image Prediction: '+err);
+            }
+            else {
+            	var speech = "Your Last Uploaded Image Is of Type";
+	    	      
+	              speech += '. .';
+	              speech += result.ImageType;
+	              speech += '. .';
+	              speech += 'With Probability ';
+	              speech += '. .';
+	              speech += result.ImageType*100;
+	              
+	              speech += 'Percent ';
+	           
+                 send_alexa_response(res, speech, 'Salesforce', 'Get Current Case', 'Success', false);
+            }
+
+		});
+	});	
+}
 
 }
