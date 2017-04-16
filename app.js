@@ -320,13 +320,16 @@ function route_alexa_intent(req, res) {
 	   intent.oauth = sfdc_amazon.splitToken(req.body.session.user.accessToken);
 	   console.log("INTENT>>>"+intent.intentName);
 	   console.log("USERID>>>>"+req.body.session.user.userId);
-
+           
 	   intent_function = intent_functions[intent.intentName];
+	   if(intent.intentName!='CreateCase')
 	   intent_function(req,res,intent);
+	   else
+		intent_function(req,res,intent,req.body.session);   
    }
 }
-function createCase(req,res,intent){
-		console.log('In Creae Case'+req.body.session.attributes);
+function createCase(req,res,intent,session){
+		console.log('In Creae Case'+session.attributes);
 		var speech = "Lets Create a Case in smart way";
 		speech+='..';
 		speech+='Please tell me the description of the case';
