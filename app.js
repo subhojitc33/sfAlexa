@@ -385,7 +385,9 @@ function ProcessCaseInput(req,res,intent){
 		}
 		
 	}
-}
+	}
+}	
+
 function PredictImage(req,res,intent) {
 	org.authenticate({ username: username, password: password}, function(err2, resp){
 	console.log(org.oauth.instance_url+'####'+org.oauth);
