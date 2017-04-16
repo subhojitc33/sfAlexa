@@ -347,7 +347,7 @@ function ProcessCaseInput(req,res,intent){
 		stage.Name='ask_casepriority';
 		send_alexa_response(res, speech, 'Salesforce', 'Create Case Stage 2', 'Success', false);
 	}
-	if(stage.Name=='ask_casepriority'){
+	else if(stage.Name=='ask_casepriority'){
 		var speech = "Please tell me the case Type";
 		
 		stage.casepriority=intent.slots.inputcasedetails.value;
@@ -379,7 +379,8 @@ function ProcessCaseInput(req,res,intent){
 		                console.log(err);
 		                send_alexa_error(res,'Error Occored During case creation '+err);
 		              } else {
-		                send_alexa_response(res, 'Case Created', 'Salesforce', 'Case Created', 'Case Created with Case Number '+result.records[0].Name, false);
+				      console.log(result);
+		                send_alexa_response(res, 'Case Created', 'Salesforce', 'Case Created', 'Case Created with Case Number ', false);
 		              }	
 			
 		});
