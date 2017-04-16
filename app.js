@@ -382,9 +382,9 @@ function ProcessCaseInput(req,res,intent){
 				      console.log(result);
 				      var q = 'SELECT  Name from case order by lastmodifieddate desc limit 1';
 
-						org.query({ query: q }, function(err, resp){
+						org.query({ query: q }, function(err3, resp){
 
-						  if(!err && resp.records) {
+						  if(!err3 && resp.records) {
 
 						    var caseNamevar = resp.records[0];
 							   send_alexa_response(res, 'Case Created', 'Salesforce', 'Case Created', 'Case Created with Case Number '+caseNamevar.Name, false);
