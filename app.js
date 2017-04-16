@@ -371,7 +371,7 @@ function ProcessCaseInput(req,res,intent){
 		casevar.set('Priority', req.body.session.attributes.casepriority);
 		casevar.set('Type', req.body.session.attributes.casetype);	 
 		casevar.set('Description', req.body.session.attributes.description);	 
-		org.insert({oauth:oauth, sobject:casevar,	function(err,result) {
+		org.insert({oauth:oauth, sobject:casevar},	function(err,result) {
 		  if(err) {
 		                console.log(err);
 		                send_alexa_error(res,'Error Occored During case creation '+err);
@@ -386,7 +386,7 @@ function ProcessCaseInput(req,res,intent){
 		
 	}
 	}
-}	
+
 
 function PredictImage(req,res,intent) {
 	org.authenticate({ username: username, password: password}, function(err2, resp){
@@ -417,5 +417,4 @@ function PredictImage(req,res,intent) {
 		});
 	});	
 }
-
 
