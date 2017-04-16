@@ -380,7 +380,18 @@ function ProcessCaseInput(req,res,intent){
 		                send_alexa_error(res,'Error Occored During case creation '+err);
 		              } else {
 				      console.log(result);
-		                send_alexa_response(res, 'Case Created', 'Salesforce', 'Case Created', 'Case Created with Case Number ', false);
+				      var q = 'SELECT  Name from case where Id=\''+result.id+'\'';
+
+						org.query({ query: q }, function(err, resp){
+
+						  if(!err && resp.records) {
+
+						    var caseNamevar = resp.records[0];
+							   send_alexa_response(res, 'Case Created', 'Salesforce', 'Case Created', 'Case Created with Case Number '+caseNamevar.Name, false);
+						  }
+						});
+			     
+		               
 		              }	
 			
 		});
