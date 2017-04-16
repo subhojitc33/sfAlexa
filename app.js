@@ -330,7 +330,7 @@ function createCase(req,res,intent){
 		var speech = "Lets Create a Case in smart way";
 		speech+='..';
 		speech+='Please tell me the description of the case';
-		req.body.session.attributes.stage='ask_casedescription';
+		req.body.session.attributes['stage']='ask_casedescription';
 		send_alexa_response(res, speech, 'Salesforce', 'Create Case Stage 1', 'Success', false);
 	console.log('Done In Creae Case');
 	
