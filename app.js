@@ -339,21 +339,22 @@ function createCase(req,res,intent){
 	
 }
 function ProcessCaseInput(req,res,intent){
-	if(req.body.session.attributes.stage=='ask_casedescription'){
+	console.log(stage);
+	if(stage.Name=='ask_casedescription'){
 		var speech = "Please tell me the case priority";
 		
 		stage.description=intent.slots.post.value;
 		stage.Name='ask_casepriority';
 		send_alexa_response(res, speech, 'Salesforce', 'Create Case Stage 2', 'Success', false);
 	}
-	if(req.body.session.attributes.stage=='ask_casepriority'){
+	if(stage.Name=='ask_casepriority'){
 		var speech = "Please tell me the case priority";
 		
 		stage.casepriority=intent.slots.post.value;
 		stage.attributes.stage='ask_caseptype';
 		send_alexa_response(res, speech, 'Salesforce', 'Create Case Stage 3', 'Success', false);
 	}
-	else if(req.body.session.attributes.stage=='ask_caseptype'){
+	else if(stage.Name=='ask_caseptype'){
 		var speech = "Do you want to create a case ?";
 		
 		stage.casetype=intent.slots.post.value;
@@ -371,9 +372,9 @@ function ProcessCaseInput(req,res,intent){
 		console.log("CHATTER POST>>>>"+post);
 		var casevar = nforce.createSObject('Case');
 		casevar.set('Status', 'New');
-		casevar.set('Priority', req.body.session.attributes.casepriority);
-		casevar.set('Type', req.body.session.attributes.casetype);	 
-		casevar.set('Description', req.body.session.attributes.description);	 
+		casevar.set('Priority', stage.casepriority);
+		casevar.set('Type', stage.casetype);	 
+		casevar.set('Description', stage.description);	 
 		org.insert({oauth:oauth, sobject:casevar},	function(err,result) {
 		  if(err) {
 		                console.log(err);
