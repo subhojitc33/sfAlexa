@@ -351,7 +351,7 @@ function ProcessCaseInput(req,res,intent){
 		var speech = "Please tell me the case priority";
 		
 		stage.casepriority=intent.slots.inputcasedetails.value;
-		stage.attributes.stage='ask_caseptype';
+		stage.Name='ask_caseptype';
 		send_alexa_response(res, speech, 'Salesforce', 'Create Case Stage 3', 'Success', false);
 	}
 	else if(stage.Name=='ask_caseptype'){
