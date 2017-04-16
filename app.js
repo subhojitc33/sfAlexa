@@ -331,7 +331,7 @@ function route_alexa_intent(req, res) {
 function createCase(req,res,intent){
 		console.log('In Creae Case');
 		var speech = "Lets Create a Case in smart way";
-		speech+='..';
+		speech+='. .';
 		speech+='Please tell me the description of the case';
 		stage.Name='ask_casedescription';
 		send_alexa_response(res, speech, 'Salesforce', 'Create Case Stage 1', 'Success', false);
@@ -343,33 +343,32 @@ function ProcessCaseInput(req,res,intent){
 	if(stage.Name=='ask_casedescription'){
 		var speech = "Please tell me the case priority";
 		
-		stage.description=intent.slots.post.value;
+		stage.description=intent.slots.inputcasedetails.value;
 		stage.Name='ask_casepriority';
 		send_alexa_response(res, speech, 'Salesforce', 'Create Case Stage 2', 'Success', false);
 	}
 	if(stage.Name=='ask_casepriority'){
 		var speech = "Please tell me the case priority";
 		
-		stage.casepriority=intent.slots.post.value;
+		stage.casepriority=intent.slots.inputcasedetails.value;
 		stage.attributes.stage='ask_caseptype';
 		send_alexa_response(res, speech, 'Salesforce', 'Create Case Stage 3', 'Success', false);
 	}
 	else if(stage.Name=='ask_caseptype'){
 		var speech = "Do you want to create a case ?";
 		
-		stage.casetype=intent.slots.post.value;
+		stage.casetype=intent.slots.inputcasedetails.value;
 		stage.Name='ask_caseconfirm';
 		send_alexa_response(res, speech, 'Salesforce', 'Create Case Stage 4', 'Success', false);
 	}
 	else if(stage.Name=='ask_caseconfirm'){
-		var responsevar=intent.slots.post.value;
+		var responsevar=intent.slots.inputcasedetails.value;
 		if(responsevar=='yes' || responsevar=='yup' || responsevar=='yeh'){
 		 org.authenticate({ username: username, password: password}, function(err2, resp){
 		console.log(org.oauth.instance_url+'####'+org.oauth);
 			var oauth=resp;
 			org.oauth=resp;
-			var post = intent.slots.post.value;
-		console.log("CHATTER POST>>>>"+post);
+		
 		var casevar = nforce.createSObject('Case');
 		casevar.set('Status', 'New');
 		casevar.set('Priority', stage.casepriority);
