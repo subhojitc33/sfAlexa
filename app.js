@@ -358,7 +358,7 @@ function ProcessCaseInput(req,res,intent){
 		send_alexa_response(res, speech, 'Salesforce', 'Create Case Stage 4', 'Success', false);
 	}
 	else if(req.body.session.attributes.stage=='ask_caseconfirm'){
-		var responsevar=intent.slots.post.value
+		var responsevar=intent.slots.post.value;
 		if(responsevar=='yes' || responsevar=='yup' || responsevar=='yeh'){
 		 org.authenticate({ username: username, password: password}, function(err2, resp){
 		console.log(org.oauth.instance_url+'####'+org.oauth);
@@ -371,7 +371,7 @@ function ProcessCaseInput(req,res,intent){
 		casevar.set('Priority', req.body.session.attributes.casepriority);
 		casevar.set('Type', req.body.session.attributes.casetype);	 
 		casevar.set('Description', req.body.session.attributes.description);	 
-		org.insert({oauth:oauth, sobject:'Case'	function(err,result) {
+		org.insert({oauth:oauth, sobject:casevar,	function(err,result) {
 		  if(err) {
 		                console.log(err);
 		                send_alexa_error(res,'Error Occored During case creation '+err);
