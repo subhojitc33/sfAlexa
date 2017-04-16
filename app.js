@@ -66,7 +66,8 @@ intent_functions['OpenCase'] = OpenCase;
 intent_functions['UpdateCase'] = UpdateCase;
 intent_functions['AddPost'] = AddPost;
 intent_functions['PredictImage'] = PredictImage;
-
+intent_functions['CreateCase'] = createCase;
+intent_functions['ProcessCaseInput'] = ProcessCaseInput;
 function PleaseWait(req,res,intent) {
   send_alexa_response(res, 'Waiting', 'Salesforce', '...', 'Waiting', false);
 }
@@ -323,7 +324,68 @@ function route_alexa_intent(req, res) {
 	   intent_function = intent_functions[intent.intentName];
 	   intent_function(req,res,intent);
    }
-}	
+}
+function createCase(req,res,intent){
+		
+		var speech = "Lets Create a Case in smart way";
+		speech+='..';
+		speech+='Please tell me the description of the case';
+		req.body.session.attributes.stage='ask_casedescription';
+		send_alexa_response(res, speech, 'Salesforce', 'Create Case Stage 1', 'Success', false);
+	
+	
+}
+function ProcessCaseInput(req,res,intent){
+	if(req.body.session.attributes.stage=='ask_casedescription'){
+		var speech = "Please tell me the case priority";
+		
+		req.body.session.attributes.description=intent.slots.post.value;
+		req.body.session.attributes.stage='ask_casepriority';
+		send_alexa_response(res, speech, 'Salesforce', 'Create Case Stage 2', 'Success', false);
+	}
+	if(req.body.session.attributes.stage=='ask_casepriority'){
+		var speech = "Please tell me the case priority";
+		
+		req.body.session.attributes.casepriority=intent.slots.post.value;
+		req.body.session.attributes.stage='ask_caseptype';
+		send_alexa_response(res, speech, 'Salesforce', 'Create Case Stage 3', 'Success', false);
+	}
+	else if(req.body.session.attributes.stage=='ask_caseptype'){
+		var speech = "Do you want to create a case ?";
+		
+		req.body.session.attributes.casetype=intent.slots.post.value;
+		req.body.session.attributes.stage='ask_caseconfirm';
+		send_alexa_response(res, speech, 'Salesforce', 'Create Case Stage 4', 'Success', false);
+	}
+	else if(req.body.session.attributes.stage=='ask_caseconfirm'){
+		var responsevar=intent.slots.post.value
+		if(responsevar=='yes' || responsevar=='yup' || responsevar=='yeh'){
+		 org.authenticate({ username: username, password: password}, function(err2, resp){
+		console.log(org.oauth.instance_url+'####'+org.oauth);
+			var oauth=resp;
+			org.oauth=resp;
+			var post = intent.slots.post.value;
+		console.log("CHATTER POST>>>>"+post);
+		var casevar = nforce.createSObject('Case');
+		casevar.set('Status', 'New');
+		casevar.set('Priority', req.body.session.attributes.casepriority);
+		casevar.set('Type', req.body.session.attributes.casetype);	 
+		casevar.set('Description', req.body.session.attributes.description);	 
+		org.insert({oauth:oauth, sobject:'Case'	function(err,result) {
+		  if(err) {
+		                console.log(err);
+		                send_alexa_error(res,'Error Occored During case creation '+err);
+		              } else {
+		                send_alexa_response(res, 'Case Created', 'Salesforce', 'Case Created', 'Case Creatd ', false);
+		              }	
+			
+		});
+			     });
+			
+		}
+		
+	}
+}
 function PredictImage(req,res,intent) {
 	org.authenticate({ username: username, password: password}, function(err2, resp){
 	console.log(org.oauth.instance_url+'####'+org.oauth);
