@@ -326,7 +326,7 @@ function route_alexa_intent(req, res) {
    }
 }
 function createCase(req,res,intent){
-		console.log('In Creae Case');
+		console.log('In Creae Case'+req.body);
 		var speech = "Lets Create a Case in smart way";
 		speech+='..';
 		speech+='Please tell me the description of the case';
