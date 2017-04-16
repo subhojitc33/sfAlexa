@@ -8,7 +8,7 @@ var oauth_timeout = process.env.oauth_timeout || 5400;
 var DEBUG_ON = process.env.DEBUG_ON || true;
 var username=process.env.SF_USER_NAME;
 var password=process.env.SF_PASSWORD;
-var stage={"Name":"","description":"","casetype":"","casepriority":""}';
+var stage={"Name":"","description":"","casetype":"","casepriority":""};
 
 /* REQUIRED PACKAGES */
 
