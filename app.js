@@ -8,6 +8,7 @@ var oauth_timeout = process.env.oauth_timeout || 5400;
 var DEBUG_ON = process.env.DEBUG_ON || true;
 var username=process.env.SF_USER_NAME;
 var password=process.env.SF_PASSWORD;
+var stage={"Name":"","description":"","casetype":"","casepriority":""}';
 
 /* REQUIRED PACKAGES */
 
@@ -322,18 +323,17 @@ function route_alexa_intent(req, res) {
 	   console.log("USERID>>>>"+req.body.session.user.userId);
            
 	   intent_function = intent_functions[intent.intentName];
-	   if(intent.intentName!='CreateCase')
+	  
 	   intent_function(req,res,intent);
-	   else
-		intent_function(req,res,intent,req.body.session);   
+	  
    }
 }
-function createCase(req,res,intent,session){
-		console.log('In Creae Case'+session.attributes);
+function createCase(req,res,intent){
+		console.log('In Creae Case');
 		var speech = "Lets Create a Case in smart way";
 		speech+='..';
 		speech+='Please tell me the description of the case';
-		req.session.attributes.stage='ask_casedescription';
+		stage.Name='ask_casedescription';
 		send_alexa_response(res, speech, 'Salesforce', 'Create Case Stage 1', 'Success', false);
 	console.log('Done In Creae Case');
 	
@@ -342,25 +342,25 @@ function ProcessCaseInput(req,res,intent){
 	if(req.body.session.attributes.stage=='ask_casedescription'){
 		var speech = "Please tell me the case priority";
 		
-		req.body.session.attributes.description=intent.slots.post.value;
-		req.body.session.attributes.stage='ask_casepriority';
+		stage.description=intent.slots.post.value;
+		stage.Name='ask_casepriority';
 		send_alexa_response(res, speech, 'Salesforce', 'Create Case Stage 2', 'Success', false);
 	}
 	if(req.body.session.attributes.stage=='ask_casepriority'){
 		var speech = "Please tell me the case priority";
 		
-		req.body.session.attributes.casepriority=intent.slots.post.value;
-		req.body.session.attributes.stage='ask_caseptype';
+		stage.casepriority=intent.slots.post.value;
+		stage.attributes.stage='ask_caseptype';
 		send_alexa_response(res, speech, 'Salesforce', 'Create Case Stage 3', 'Success', false);
 	}
 	else if(req.body.session.attributes.stage=='ask_caseptype'){
 		var speech = "Do you want to create a case ?";
 		
-		req.body.session.attributes.casetype=intent.slots.post.value;
-		req.body.session.attributes.stage='ask_caseconfirm';
+		stage.casetype=intent.slots.post.value;
+		stage.Name='ask_caseconfirm';
 		send_alexa_response(res, speech, 'Salesforce', 'Create Case Stage 4', 'Success', false);
 	}
-	else if(req.body.session.attributes.stage=='ask_caseconfirm'){
+	else if(stage.Name=='ask_caseconfirm'){
 		var responsevar=intent.slots.post.value;
 		if(responsevar=='yes' || responsevar=='yup' || responsevar=='yeh'){
 		 org.authenticate({ username: username, password: password}, function(err2, resp){
