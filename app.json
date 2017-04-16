@@ -4,23 +4,23 @@
 	"env": {
 		"SF_CLIENT_ID": {
 			"description": "Consumer Key of your Salesforce Connected App",
-			"value": ""
+			"value": "3MVG9ZL0ppGP5UrAjkXOacFI9lqNFAA3UZbWkFy3RyiCKzE7PfmhttvbQo3MnEW.V2ccoEBQnktQuaI92PHcm"
 		},
 		"SF_CLIENT_SECRET": {
 			"description": "Consumer Secret of your Salesforce Connected App",
-			"value": ""
+			"value": "4700911389884901991"
 		},
 		"SF_USER_NAME": {
 			"description": "Salesforce username for your integration user",
-			"value": ""
+			"value": "subhojit_dev3@gmail.com"
 		},
 		"SF_PASSWORD": {
 			"description": "Salesforce password for your integration user",
-			"value": ""
+			"value": "November@2013XD1K3tYl2sQ318v5FhDu6huso"
 		},
 		"SF_REDIRECT_URI": {
 			"description": "Redirect URI of your Salesforce Connected App",
-			"value": ""
+			"value": "https://layla.amazon.com/api/skill/link/M2ZXTLNFRIDBRA"
 		}
 	}
 }
