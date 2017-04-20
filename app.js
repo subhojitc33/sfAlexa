@@ -67,6 +67,7 @@ intent_functions['OpenCase'] = OpenCase;
 intent_functions['UpdateCase'] = UpdateCase;
 intent_functions['AddPost'] = AddPost;
 intent_functions['PredictImage'] = PredictImage;
+intent_functions['PredictImageWatson'] = PredictImageWatson;
 intent_functions['CreateCase'] = createCase;
 intent_functions['ProcessCaseInput'] = ProcessCaseInput;
 intent_functions['AnalyseSentiment'] = AnalyseSentiment;
