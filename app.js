@@ -431,7 +431,7 @@ function PredictImage(req,res,intent) {
               send_alexa_error(res,'An error occured during Image Prediction: '+err);
             }
             else {
-            	var speech = "Your Last Uploaded Image Is of Type";
+            	var speech = "As per Einstine, Your Last Uploaded Image Is of Type";
 	    	      
 	              speech += '. .';
 	              speech += result.ImageType;
@@ -448,4 +448,34 @@ function PredictImage(req,res,intent) {
 		});
 	});	
 }
+function PredictImageWatson(req,res,intent) {
+	org.authenticate({ username: username, password: password}, function(err2, resp){
+	console.log(org.oauth.instance_url+'####'+org.oauth);
+		var oauth=resp;
+		org.oauth=resp;
+	org.apexRest({oauth:oauth, uri:'PredictImageTypeWatson'},
+		function(err,result) {
+			if(err) {
+              console.log(err);
+              send_alexa_error(res,'An error occured during Image Prediction: '+err);
+            }
+            else {
+            	var speech = "As per Watson, Your Last Uploaded Image Is of Type";
+	    	      
+	              speech += '. .';
+	              speech += result.ImageType;
+	              speech += '. .';
+	              speech += 'With Probability ';
+	              speech += '. .';
+	              speech += (result.prob*100);
+	              
+	              speech += 'Percent ';
+	           
+                 send_alexa_response(res, speech, 'Salesforce', 'Predict Last Uploaded Image Type', 'Success', false);
+            }
+
+		});
+	});	
+}
+
 
