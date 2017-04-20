@@ -69,6 +69,7 @@ intent_functions['AddPost'] = AddPost;
 intent_functions['PredictImage'] = PredictImage;
 intent_functions['CreateCase'] = createCase;
 intent_functions['ProcessCaseInput'] = ProcessCaseInput;
+intent_functions['AnalyseSentiment'] = AnalyseSentiment;
 function PleaseWait(req,res,intent) {
   send_alexa_response(res, 'Waiting', 'Salesforce', '...', 'Waiting', false);
 }
@@ -207,7 +208,28 @@ function OpenCase(req,res,intent) {
 		});
 		});
 }
+function AnalyseSentiment(req,res,intent) {
+	org.authenticate({ username: username, password: password}, function(err2, resp){
+	console.log(org.oauth.instance_url+'####'+org.oauth);
+		var oauth=resp;
+		org.oauth=resp;
+	var number = intent.slots.number.value;
+	number = number.toString();
+	console.log("CASE IDENTIFIER>>>>>"+number);
+    org.apexRest({oauth:oauth, uri:'WatsonAnalysis',method:'POST',body:'{"CaseIdentifier":"'+number+'"}'},
+		function(err,result) {
+			if(err) {
+              console.log(err);
+              send_alexa_error(res,'An error occured checking for recents cases: '+err);
+            }
+            else {
+            	var speech = 'Emotional Sentiment of the case is  '+result.emotionaltone;
+            	send_alexa_response(res, speech, 'Salesforce', 'Open Case', 'Success', false);
+            }
 
+		});
+		});
+}
 
 
 
