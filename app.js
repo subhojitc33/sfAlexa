@@ -71,6 +71,7 @@ intent_functions['PredictImageWatson'] = PredictImageWatson;
 intent_functions['CreateCase'] = createCase;
 intent_functions['ProcessCaseInput'] = ProcessCaseInput;
 intent_functions['AnalyseSentiment'] = AnalyseSentiment;
+intent_functions['OCRImage'] = OCRImage;
 function PleaseWait(req,res,intent) {
   send_alexa_response(res, 'Waiting', 'Salesforce', '...', 'Waiting', false);
 }
@@ -418,7 +419,30 @@ function ProcessCaseInput(req,res,intent){
 		
 	}
 	}
+function OCRImage(req,res,intent) {
+	org.authenticate({ username: username, password: password}, function(err2, resp){
+	console.log(org.oauth.instance_url+'####'+org.oauth);
+		var oauth=resp;
+		org.oauth=resp;
+	org.apexRest({oauth:oauth, uri:'OCRImage'},
+		function(err,result) {
+			if(err) {
+              console.log(err);
+              send_alexa_error(res,'An error occured during Image Prediction: '+err);
+            }
+            else {
+            	var speech = " Your OCR Text is ";
+	    	      
+	              speech += '. .';
+	              speech += result.ocrtext;
+	            
+	           
+                 send_alexa_response(res, speech, 'Salesforce', 'OCR Last Uploaded Image Type', 'Success', false);
+            }
 
+		});
+	});	
+}
 
 function PredictImage(req,res,intent) {
 	org.authenticate({ username: username, password: password}, function(err2, resp){
@@ -449,6 +473,7 @@ function PredictImage(req,res,intent) {
 		});
 	});	
 }
+
 function PredictImageWatson(req,res,intent) {
 	org.authenticate({ username: username, password: password}, function(err2, resp){
 	console.log(org.oauth.instance_url+'####'+org.oauth);
