@@ -122,14 +122,14 @@ function GetLatestCases(req,res,intent) {
             }
             else {
             	var speech = "Here are your latest cases. ";
-            	for(var i = 0; i < result.length; i++) {
+            	/*for(var i = 0; i < result.length; i++) {
                       speech += 'Case Number ';
                       speech += i+1;
                       speech += '. .';
                       speech += result[i].Subject__c;
                       speech += '. .';
                       if(i != result.length-1) {speech += 'Next case,'};
-                    }
+                    }*/
                     send_alexa_response(res, speech, 'Salesforce', 'Get Latest Cases', 'Success', false);
             }
 
