@@ -8,6 +8,7 @@ var oauth_timeout = process.env.oauth_timeout || 5400;
 var DEBUG_ON = process.env.DEBUG_ON || true;
 var username=process.env.SF_USER_NAME;
 var password=process.env.SF_PASSWORD;
+var initialCommand=process.env.ALEXA_INT_CMD;
 var stage={"Name":"","description":"","casetype":"","casepriority":""};
 
 /* REQUIRED PACKAGES */
@@ -326,7 +327,7 @@ function route_alexa_begin(req, res) {
    if(req.body.session == null || req.body.session.user == null || req.body.session.user.accessToken == null) {
         send_alexa_response(res, 'Please log into Salesforce', 'Salesforce', 'Not Logged In', 'Error: Not Logged In', true);
    } else {
-   		send_alexa_response(res, 'Connected to Salesforce',  'Salesforce', 'Connection Attempt', 'Logged In (Single User)', false);
+   		send_alexa_response(res, initialCommand,  'Salesforce', 'Connection Attempt', 'Logged In (Single User)', false);
    }
    
    console.log('!----REQUEST SESSION--------!');
