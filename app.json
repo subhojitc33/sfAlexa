@@ -4,11 +4,11 @@
 	"env": {
 		"SF_CLIENT_ID": {
 			"description": "Consumer Key of your Salesforce Connected App",
-			"value": "3MVG9ZL0ppGP5UrAjkXOacFI9lqNFAA3UZbWkFy3RyiCKzE7PfmhttvbQo3MnEW.V2ccoEBQnktQuaI92PHcm"
+			"value": "3MVG9ZL0ppGP5UrAjkXOacFI9lrnXXTtK6e8rgf5anMVmWSpaZcv6fk370Wv.DkyMek80RVTn7F.GBj6bp_IG"
 		},
 		"SF_CLIENT_SECRET": {
 			"description": "Consumer Secret of your Salesforce Connected App",
-			"value": "4700911389884901991"
+			"value": "8714736707535133431"
 		},
 		"SF_USER_NAME": {
 			"description": "Salesforce username for your integration user",
@@ -16,11 +16,15 @@
 		},
 		"SF_PASSWORD": {
 			"description": "Salesforce password for your integration user",
-			"value": "November@2013XD1K3tYl2sQ318v5FhDu6huso"
+			"value": "November@20133qH7Z56TR2QjNUFgKZ4xCPAEg"
 		},
 		"SF_REDIRECT_URI": {
 			"description": "Redirect URI of your Salesforce Connected App",
-			"value": "https://layla.amazon.com/api/skill/link/M2ZXTLNFRIDBRA"
+			"value": "https://pitangui.amazon.com/api/skill/link/M3B31IUL5VWPBE"
+		},
+		"ALEXA_INT_CMD": {
+			"description": "Redirect URI of your Salesforce Connected App",
+			"value": "Sure, How Can I help You ?"
 		}
 	}
 }
