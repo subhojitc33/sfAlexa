@@ -324,9 +324,9 @@ function send_alexa_response(res, speech, title, subtitle, content, endSession) 
 function route_alexa_begin(req, res) {
    
    alexa.launchRequest(req.body);
-   if(req.body.session == null || req.body.session.user == null || req.body.session.user.accessToken == null) {
+/*   if(req.body.session == null || req.body.session.user == null || req.body.session.user.accessToken == null) {
         send_alexa_response(res, 'Please log into Salesforce', 'Salesforce', 'Not Logged In', 'Error: Not Logged In', true);
-   } else {
+   } else*/ {
    		send_alexa_response(res, initialCommand,  'Salesforce', 'Connection Attempt', 'Logged In (Single User)', false);
    }
    
