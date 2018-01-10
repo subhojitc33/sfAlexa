@@ -16,7 +16,7 @@
 		},
 		"SF_PASSWORD": {
 			"description": "Salesforce password for your integration user",
-			"value": "November@20133qH7Z56TR2QjNUFgKZ4xCPAEg"
+			"value": "3July@2013lWZwlmYm3y5DqbuGCvUaJJUxl"
 		},
 		"SF_REDIRECT_URI": {
 			"description": "Redirect URI of your Salesforce Connected App",
